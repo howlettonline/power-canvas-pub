@@ -1,0 +1,15 @@
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# A downloaded or test-extracted Hub bundle, and anything that holds a Hub's own settings or secrets
+power-canvas-hub/
+*.tar.gz
+.env
+secrets/
