@@ -112,6 +112,14 @@ The bundle replaces `compose.yaml`, `.env.example` and the `mosquitto` and `givt
 
 **To go back to an earlier version,** or to install a particular one, replace `latest/download` in the address with `download/vX.Y.Z` (for example `download/v1.2.3`) and run the same commands. The release notes mention anything that stops a Hub going back.
 
+**Clean up old images.** An upgrade leaves the previous Hub image on the computer, about 250 MB each, and they add up. Once the new version is running, remove the ones that are no longer used:
+
+```bash
+docker image prune -a
+```
+
+Docker asks you to confirm, and never removes an image that a container is using, so the running Hub, GivTCP and Mosquitto are safe. It does remove every unused image on the computer, including any that belong to other things you run with Docker, which is only a download to get back. Do not run it with `--volumes`, and do not use `docker system prune --volumes`: that can delete the Hub's data, including its identity. To remove just one old Hub version, use `docker rmi ghcr.io/howlettonline/power-canvas-hub:X.Y.Z`.
+
 ## Uninstall
 
 1. **In Power Canvas, retire the Hub** under **Settings > Hubs & devices**. This hands its devices over and removes the Hub from Power Canvas's cloud, which is what stops it being counted as lost. If the location's inverter control is set to the Hub, switch it back to the GivEnergy cloud first; Power Canvas will not let you retire the Hub until then.
